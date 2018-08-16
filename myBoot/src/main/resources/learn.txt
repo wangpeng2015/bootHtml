@@ -1,0 +1,51 @@
+1、注解
+//启动注解
+@SpringBootApplication
+
+//定时任务注解
+@EnableScheduling 定时任务注解
+
+//标注在类上，相当于把该类作为spring的xml配置文件中的<beans>
+@Configuration
+
+//junit test测试使用
+@SpringBootTest
+
+//相当于 <bean id="" class=""/>
+@Component
+
+//实现session统一 存入redis
+@EnableRedisHttpSession
+
+
+1.凡是子类及带属性、方法的类都注册Bean到Spring中，交给它管理；
+1.1Spring的@Bean注解用于告诉方法，产生一个Bean对象，然后这个Bean对象交给Spring管理
+2.@Bean 用在方法上，告诉Spring容器，你可以从下面这个方法中拿到一个Bean
+@Bean
+
+
+//其中@Order注解表示执行过滤顺序，值越小，越先执行
+@Order(1)
+
+//注解拦截器
+@WebFilter(filterName = "gooSeFilter",urlPatterns = "/*")
+
+
+！！！！
+在 SpringBootApplication 上使用@ServletComponentScan 注解后，Servlet、Filter、Listener 可以直接通过
+@WebServlet、@WebFilter、@WebListener 注解自动注册，无需其他代码。
+
+
+
+Spring4之后新加入的注解，原来返回json需要@ResponseBody和@Controller配合。
+即@RestController是@ResponseBody和@Controller的组合注解。
+@RestController
+
+
+@PathVaribale 获取url中的数据
+@RequestParam 获取请求参数的值
+@GetMapping 组合注解
+@RequestMapping("/{businessName}/{methodName}")
+    public void executeAPI( @PathVariable String businessName,
+            @PathVariable String methodName) throws Exception {
+        Map<String, Object> map = new HashMap<String, Object>();

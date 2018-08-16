@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wp.myboot.mapper.Mp4Mapper">
+
+	<select id="getMp4_category" resultType="java.util.Map">
+		SELECT m.id,m.name FROM
+		mp4_category m
+	</select>
+
+	<select id="findMp4_data" parameterType="string"
+		resultType="java.util.Map">
+		SELECT dd.id,dd.category,dd.name,dd.img,dd.link 
+		FROM mp4_data dd 
+		where dd.category LIKE CONCAT(CONCAT('%',#{type},'%'))
+		limit ${pageStart},${pageSize}
+	</select>
+
+	<select id="findMp4Novel" resultType="java.util.Map">
+		SELECT
+		mm.id,mm.name,mm.content FROM mp4_novel mm
+	</select>
+	
+	<select id="getTotleCount" parameterType="string"
+		resultType="integer">
+		SELECT count(1) 
+		FROM mp4_data dd 
+		where dd.category LIKE CONCAT(CONCAT('%',#{type},'%'))
+	</select>
+
+	<insert id="saveFileNameMul">
+		insert into mp4_videos (randStr,fileType,fileContentType,fileName) values (#{randStr},#{fileType},#{fileContentType},#{fileName})
+	</insert>
+
+
+	<select id="getAppVersionAndUrl" resultType="java.util.Map">
+		select app_version,app_download_url from mp4_app_version
+	</select>
+
+	<select id="getImgLink" resultType="java.util.Map">
+		select img,link from mp4_img
+	</select>
+
+
+</mapper>
